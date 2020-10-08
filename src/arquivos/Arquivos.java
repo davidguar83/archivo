@@ -7,6 +7,8 @@ package arquivos;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -15,6 +17,10 @@ import javax.swing.JOptionPane;
  *
  * @author david
  */
+
+///home/dam2a/Escritorio/prueba/boletin1.odt
+
+
 public class Arquivos {
 
     /**
@@ -26,8 +32,13 @@ public class Arquivos {
         Cadea a2 = new Cadea();
 
         // a1.eDirectorio();
-        a2.creaDirectorio();
-
+       // a2.creaDirectorio();
+      // a2.modoAcceso();
+       
+       a2.comprobarLonxitude();
+       a2.mEscritura();
+       a2.mLectura();
+       
     }
 }
 
@@ -44,8 +55,7 @@ class Cadea {
 
         File ruta = new File(r);
 
-       // String ruta_destino = ruta.getAbsolutePath();
-
+        // String ruta_destino = ruta.getAbsolutePath();
         System.out.println(ruta.getAbsolutePath());
 
         System.out.println(ruta.exists());
@@ -79,7 +89,7 @@ class Cadea {
         }
 
     }
-    
+
     public void creaDirectorio() {
 
         File ruta = new File(r);
@@ -100,34 +110,100 @@ class Cadea {
         }
 
     }
+
+    public void creafichero() {
+
+        File ruta = new File(r);
+
+        if (ruta.exists()) {
+
+            try {
+                ruta.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+
+            System.out.println("Imposible crear el archivo ruta incorrecta");
+
+        }
+
+    }
+
+    public void modoAcceso() {
+
+        File ruta = new File(r);
+
+        if (ruta.exists()) {
+
+            if (ruta.isFile()) {
+
+                if (ruta.canRead()) {
+
+                    System.out.println(" Se pode leer");
+
+                } else {
+
+                    System.out.println(" Non se pode leer");
+
+                }
+
+                if (ruta.canWrite()) {
+
+                    System.out.println("Se pode escribir");
+
+                } else {
+
+                    System.out.println("Non se pode escribir");
+
+                }
+
+            } else {
+                System.out.println("La ruta no contiene ningun archivo");
+
+            }
+        } else {
+
+            System.out.println("Ruta no exisitente");
+
+        }
+
+    }
     
     
-    public void creafichero(){
-    
-     File ruta = new File(r);
-    
-    if (ruta.exists()) {
-       
+    public void comprobarLonxitude(){
         
-         try {
-             ruta.createNewFile();
-         } catch (IOException e) {
-             e.printStackTrace();
-         }
         
-    }else{
+         File ruta = new File(r);
+         
+         System.out.println(ruta.length());
+           
         
-        System.out.println("Imposible crear el archivo ruta incorrecta");
+    }
+    
+    public void mLectura(){
+        
+        File ruta = new File(r);
+        
+        ruta.setReadOnly();
+        
+        System.out.println(" permiso lectura = " + ruta.canRead());
+        
         
         
     }
     
+    
+    public void mEscritura(){
+        
+        File ruta = new File(r);
+        
+        ruta.setWritable(false);
+        
+        System.out.println("permisos escritura = " + ruta.canWrite());
+        
     }
-    
-    
-    
-    
-    
     
 
 }
