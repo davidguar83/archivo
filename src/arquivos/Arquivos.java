@@ -17,10 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author david
  */
-
 ///home/dam2a/Escritorio/prueba/boletin1.odt
-
-
 public class Arquivos {
 
     /**
@@ -32,13 +29,12 @@ public class Arquivos {
         Cadea a2 = new Cadea();
 
         // a1.eDirectorio();
-       // a2.creaDirectorio();
-      // a2.modoAcceso();
-       
-       a2.comprobarLonxitude();
-       a2.mEscritura();
-       a2.mLectura();
-       
+        // a2.creaDirectorio();
+        // a2.modoAcceso();
+        a2.comprobarLonxitude();
+        a2.mEscritura();
+        a2.mLectura();
+a2.borrarDirectorio();
     }
 }
 
@@ -170,40 +166,57 @@ class Cadea {
         }
 
     }
-    
-    
-    public void comprobarLonxitude(){
-        
-        
-         File ruta = new File(r);
-         
-         System.out.println(ruta.length());
-           
-        
-    }
-    
-    public void mLectura(){
-        
+
+    public void comprobarLonxitude() {
+
         File ruta = new File(r);
-        
+
+        System.out.println(ruta.length());
+
+    }
+
+    public void mLectura() {
+
+        File ruta = new File(r);
+
         ruta.setReadOnly();
-        
+
         System.out.println(" permiso lectura = " + ruta.canRead());
-        
-        
-        
+
     }
-    
-    
-    public void mEscritura(){
-        
+
+    public void mEscritura() {
+
         File ruta = new File(r);
-        
+
         ruta.setWritable(false);
-        
+
         System.out.println("permisos escritura = " + ruta.canWrite());
-        
+
     }
-    
+
+    public void borrarFichero() {
+
+        File ruta = new File(r);
+
+        ruta.delete();
+
+    }
+
+    public void borrarDirectorio() {
+
+        File ruta = new File(r);
+
+        if (ruta.exists()) {
+
+            ruta.delete();
+            
+
+        } else {
+
+            System.out.println("ruta inexistente ou con descencencia");
+
+        }
+    }
 
 }
