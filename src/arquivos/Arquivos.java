@@ -6,6 +6,9 @@
 package arquivos;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,9 +22,11 @@ public class Arquivos {
      */
     public static void main(String[] args) {
 
-        Cadea a1 = new Cadea();
+        // Cadea a1 = new Cadea();
+        Cadea a2 = new Cadea();
 
-        a1.eDirectorio();
+        // a1.eDirectorio();
+        a2.creaDirectorio();
 
     }
 }
@@ -39,7 +44,7 @@ class Cadea {
 
         File ruta = new File(r);
 
-        String ruta_destino = ruta.getAbsolutePath();
+       // String ruta_destino = ruta.getAbsolutePath();
 
         System.out.println(ruta.getAbsolutePath());
 
@@ -74,4 +79,55 @@ class Cadea {
         }
 
     }
+    
+    public void creaDirectorio() {
+
+        File ruta = new File(r);
+
+        if (ruta.exists()) {
+
+            if (ruta.isDirectory()) {
+
+                System.out.println("El directorio ya existe, imposible crearlo, cambie el nombre ");
+
+            }
+
+        } else {
+
+            ruta.mkdir();
+            System.out.println(ruta.getAbsolutePath());
+
+        }
+
+    }
+    
+    
+    public void creafichero(){
+    
+     File ruta = new File(r);
+    
+    if (ruta.exists()) {
+       
+        
+         try {
+             ruta.createNewFile();
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+        
+    }else{
+        
+        System.out.println("Imposible crear el archivo ruta incorrecta");
+        
+        
+    }
+    
+    }
+    
+    
+    
+    
+    
+    
+
 }
