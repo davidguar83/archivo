@@ -28,13 +28,14 @@ public class Arquivos {
         // Cadea a1 = new Cadea();
         Cadea a2 = new Cadea();
 
-        // a1.eDirectorio();
+        // a1.eDirectorio_eFicheiro();
         // a2.creaDirectorio();
         // a2.modoAcceso();
-        a2.comprobarLonxitude();
-        a2.mEscritura();
-        a2.mLectura();
-a2.borrarDirectorio();
+        // a2.comprobarLonxitude();
+        // a2.mEscritura();
+        // a2.mLectura();
+        // a2.borrarDirectorio();
+        a2.mContido();
     }
 }
 
@@ -44,14 +45,10 @@ class Cadea {
 
     public String r = JOptionPane.showInputDialog("Introduce ruta");
 
-    ;
-    
-    
-    public void eDirectorio() {
+    public void eDirectorio_eFicheiro() {
 
         File ruta = new File(r);
 
-        // String ruta_destino = ruta.getAbsolutePath();
         System.out.println(ruta.getAbsolutePath());
 
         System.out.println(ruta.exists());
@@ -199,8 +196,14 @@ class Cadea {
 
         File ruta = new File(r);
 
-        ruta.delete();
+        if (ruta.exists()) {
 
+            ruta.delete();
+        } else {
+
+            System.out.println("El archivo no existe o ruta incorrecta");
+
+        }
     }
 
     public void borrarDirectorio() {
@@ -210,7 +213,6 @@ class Cadea {
         if (ruta.exists()) {
 
             ruta.delete();
-            
 
         } else {
 
@@ -218,5 +220,54 @@ class Cadea {
 
         }
     }
+
+    public void mContido() {
+
+        File ruta = new File(r);
+
+        String[] nombre_Contenido = ruta.list();
+
+        if (ruta.exists()) {
+
+            for (int i = 0; i < nombre_Contenido.length; i++) {
+
+                System.out.println(nombre_Contenido[i]); ////muestra el contenido de la ruta dada, tanto directorios como archivos
+
+                File subruta = new File(ruta.getAbsolutePath(), nombre_Contenido[i]); // almacena en el objeto  cada archivo o directorio de la ruta principal
+
+                if (subruta.isDirectory()) { // sirve para saber si la subruta tiene directorios, si es asi  lo almacena en el siguiente array
+                    
+                
+
+                    String[] archivos_Subcarpetas = subruta.list(); // almacena en el array los subdirectorios y archivos de la subruta
+
+                    for (int j = 0; j < archivos_Subcarpetas.length; j++) {
+
+                        System.out.println(archivos_Subcarpetas[j]);  // muestra los archivos y directorios de los subdirectorios
+                        
+                        File sub_sub_ruta = new File(subruta.getAbsolutePath(),archivos_Subcarpetas[j]);  // almacena en el objeto la nueva ruta del subdirectorio encontrado en la ruta anterior
+                        
+                        if (sub_sub_ruta.isDirectory()){
+                            
+                            String[] archivos_sub_sub_carpetas=sub_sub_ruta.list(); // almacena en el array los directorios y archivos de sub subruta
+                            
+                            for (int a=0;a<archivos_sub_sub_carpetas.length;a++){
+                                
+                                System.out.println(archivos_sub_sub_carpetas[a]);  // muestra los archivos y directorios encontrado en  las sub subdirectorios
+                                
+                            }
+                            
+                        }
+                        
+
+                    }
+
+                }
+            }
+
+        }
+    }
+
+  
 
 }
